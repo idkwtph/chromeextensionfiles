@@ -52,6 +52,7 @@ Some of the stuff that this extension can do are:
  - 1.5 - Multiple bug fixes including:
           - Fixing the link not working first-try
           - Fixing CPU and RAM usage (don't know if this is how say it)
+ - 1.6 - Adds default settings to the extension
 
 ## Credits
 
