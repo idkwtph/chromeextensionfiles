@@ -6,7 +6,6 @@ let autoFillValue;
 var darkModeValue;
 chrome.storage.sync.get(function (result) {
   darkModeValue = result.darkMode;
-  console.log(darkModeValue);
   updateDarkMode();
   autoFillValue = result.autoFill;
 });
