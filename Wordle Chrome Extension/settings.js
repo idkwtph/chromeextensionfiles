@@ -3,18 +3,34 @@ const autoFillToggle = document.getElementById("autofillToggle");
 const wordleDarkToggle = document.getElementById("wordleDarkToggle");
 const previewImage = document.querySelector(".preview-image");
 
+let isFirstTime = !(localStorage.getItem("isFirstTime") === null);
+console.log(isFirstTime);
 let isDarkMode;
 let isAutoFill;
 let isWordleSync;
-chrome.storage.sync.get(function (result) {
-  isDarkMode = result.darkMode;
-  darkModeToggle.setAttribute("isChecked", isDarkMode);
-  isAutoFill = result.autoFill;
-  autoFillToggle.setAttribute("isChecked", isAutoFill);
-  isWordleSync = result.wordleSync;
-  wordleDarkToggle.setAttribute("isChecked", isWordleSync);
-  update();
-});
+
+if (isFirstTime) {
+  console.log("not first time");
+  chrome.storage.sync.get(function (result) {
+    isDarkMode = result.darkMode;
+    darkModeToggle.setAttribute("isChecked", isDarkMode);
+    isAutoFill = result.autoFill;
+    autoFillToggle.setAttribute("isChecked", isAutoFill);
+    isWordleSync = result.wordleSync;
+    wordleDarkToggle.setAttribute("isChecked", isWordleSync);
+    update();
+    localStorage.setItem("isFirstTime", "false");
+  });
+} else {
+  console.log("first time");
+  isDarkMode = true;
+  isAutoFill = true;
+  isWordleSync = false;
+  chrome.storage.sync.set({ darkMode: isDarkMode }, function () {});
+  chrome.storage.sync.set({ wordleSync: isWordleSync }, function () {});
+  chrome.storage.sync.set({ autoFill: isAutoFill }, function () {});
+  localStorage.setItem("isFirstTime", "false");
+}
 update();
 
 // setInterval(() => {
