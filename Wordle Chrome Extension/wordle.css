@@ -1,0 +1,14 @@
+.header-hint {
+  display: inline;
+}
+
+.text-hint {
+  mix-blend-mode: difference;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 670px) {
+  .header-hint {
+    display: none;
+  }
+}

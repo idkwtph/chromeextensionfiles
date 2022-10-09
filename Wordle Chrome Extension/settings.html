@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Wordle Answer Finder Extension</title>
+    <script src="settings.js" defer></script>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <h1>Settings</h1>
+    </nav>
+    <!-- <div class="alert-container">
+      <div class="alert">
+        Hey! You have made changes to tht settings. Please refresh to apply
+        these settings.
+      </div>
+    </div> -->
+    <div class="container" style="padding: 2em">
+      <div class="toggle-container">
+        <label class="toggle" id="dark-mode-toggle" for="darkModeToggle">
+          <input
+            class="toggle__input"
+            name="darkModeToggle"
+            type="checkbox"
+            id="darkModeToggle"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p>Dark Mode</p>
+      </div>
+      <!-- <p class="red">
+        Note: Toggling this on will change the mode of this settings page AND
+        the extensions page.
+      </p> -->
+      <div class="toggle-container">
+        <label class="toggle" id="autofill-toggle" for="autofillToggle">
+          <input
+            class="toggle__input"
+            name=""
+            type="checkbox"
+            id="autofillToggle"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p>Autofill</p>
+      </div>
+      <div class="toggle-container" style="margin-bottom: 2em">
+        <label class="toggle" id="wordleDark-toggle" for="wordleDarkToggle">
+          <input
+            class="toggle__input"
+            name="wordleDarkToggle"
+            type="checkbox"
+            id="wordleDarkToggle"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p>Sync Wordle Theme</p>
+      </div>
+      <a href="options.html" target="_blank" class="fullPage-link">
+        Open Full Settings Page
+        <iron-icon>
+          <svg
+            viewBox="0 0 24 24"
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+            style="
+              fill: var(--color);
+              pointer-events: none;
+              display: block;
+              width: 30px;
+              height: 30px;
+            "
+          >
+            <g>
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              ></path>
+            </g>
+          </svg>
+        </iron-icon>
+      </a>
+    </div>
+  </body>
+</html>

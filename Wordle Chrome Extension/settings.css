@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+/* :root {
+  --red: #ff5f5f;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+} */
+
+.dark {
+  --background-color: #3a3a3a;
+  --color: #fff;
+}
+
+.light {
+  --background-color: #fff;
+  --color: #3a3a3a;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+label,
+h2,
+img {
+  color: var(--color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  width: 100%;
+}
+
+.nav {
+  padding: 0.5em;
+  display: flex;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  background: var(--background-color);
+  color: var(--color);
+  box-shadow: 0px 7px 50px 0px rgba(70, 70, 70, 0.62);
+}
+
+.nav h1 {
+  font-size: 3em;
+}
+
+.toggle {
+  --width: 75px;
+  --height: calc(var(--width) / 2);
+  --border-radius: calc(var(--height) / 2);
+
+  display: inline-block;
+  cursor: pointer;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__fill {
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  background: #dddddd;
+  transition: background 0.2s;
+}
+
+.toggle__input[isChecked="true"] ~ .toggle__fill {
+  background: #009578;
+}
+
+.toggle__fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--height);
+  width: var(--height);
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius);
+  transition: transform 0.2s;
+}
+
+.toggle__input[isChecked="true"] ~ .toggle__fill::after {
+  transform: translateX(var(--height));
+}
+
+.toggle-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.toggle-container:last-child {
+  margin-bottom: 2em;
+}
+
+p {
+  color: var(--color);
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+
+p.red {
+  margin-bottom: 39px;
+  color: rgba(255, 128, 119, 0.5);
+  cursor: default;
+  font-size: 1em;
+}
+
+p.red:hover {
+  color: red;
+}
+
+.fullPage-svg {
+  fill: var(--color);
+}
+
+.fullPage-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color);
+  opacity: 0.6;
+}
+
+.fullPage-link:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted var(--color); /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: fit-content;
+  background-color: var(--background-color);
+  color: var(--color);
+  text-align: center;
+  padding: 1em;
+  border-radius: 6px;
+  border: var(--color) 1px solid;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color) transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* .alert-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.alert {
+  text-align: center;
+  background: var(--red);
+  border-radius: 16px;
+  max-width: 90%;
+  padding: 10px;
+} */

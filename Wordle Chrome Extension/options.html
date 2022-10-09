@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Options - Wordle Answer Finder Extension</title>
+    <script src="settings.js" defer></script>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <h1>Settings</h1>
+    </nav>
+    <div class="container">
+      <div class="toggle-container">
+        <label class="toggle" id="dark-mode-toggle" for="darkModeToggle">
+          <input
+            class="toggle__input"
+            name="darkModeToggle"
+            type="checkbox"
+            id="darkModeToggle"
+            isChecked="true"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p class="tooltip">
+          Dark Mode
+          <span class="tooltiptext">Theme of this extension.</span>
+        </p>
+      </div>
+      <p class="red">
+        Note: Toggling this on will change the mode of this settings page AND
+        the extensions page.
+      </p>
+      <div class="toggle-container">
+        <label class="toggle" id="autofill-toggle" for="autofillToggle">
+          <input
+            class="toggle__input"
+            name="autofillToggle"
+            type="checkbox"
+            id="autofillToggle"
+            isChecked="true"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p class="tooltip">
+          Autofill
+          <span class="tooltiptext"
+            >Fills in the Wordle answer automatically when the page loads.</span
+          >
+        </p>
+      </div>
+      <div class="toggle-container">
+        <label class="toggle" id="wordleDark-toggle" for="wordleDarkToggle">
+          <input
+            class="toggle__input"
+            name="wordleDarkToggle"
+            type="checkbox"
+            id="wordleDarkToggle"
+            isChecked="false"
+          />
+          <div class="toggle__fill"></div>
+        </label>
+        <p class="tooltip">
+          Sync Wordle Theme
+          <span class="tooltiptext"
+            >Syncs the theme of the Wordle website with this extension.</span
+          >
+        </p>
+      </div>
+      <!-- <h2>Preview:</h2>
+      <img
+        class="preview-image"
+        src=""
+        alt="An image preiew of what the settings will do"
+      /> -->
+    </div>
+  </body>
+</html>
