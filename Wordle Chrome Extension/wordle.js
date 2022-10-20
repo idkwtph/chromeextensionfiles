@@ -12980,9 +12980,11 @@ let autoFill;
 let wordleSync;
 let locationHREF;
 
-const gameState = JSON.parse(localStorage.getItem("nyt-wordle-state"));
+const stateString = "nyt-wordle-moogle/ANON";
 
-const { gameStatus } = gameState;
+const gameState = JSON.parse(localStorage.getItem(stateString));
+
+const { status: gameStatus } = gameState?.game;
 
 const date = new Date("2022-08-13".replace(/-/g, "/"));
 const currentDate = new Date();
@@ -13004,10 +13006,6 @@ chrome.storage.sync.get(function (result) {
   wordleSync = result.wordleSync;
   locationHREF = result.location;
 });
-
-// setInterval(() => {
-//   chrome.storage.sync.set({ location: location.href }, function () {});
-// }, 2000);
 
 setInterval(() => {
   chrome.storage.sync.set({ wordleAnswer: answer });
@@ -13057,39 +13055,37 @@ let thirdChar = answer.charAt(2);
 let fourthChar = answer.charAt(3);
 let fifthChar = answer.charAt(4);
 
-const rows = document.querySelectorAll(".Row-module_row__dEHfN");
+const rowString = ".Row-module_row__dEHfN";
+const rows = document.querySelectorAll(rowString);
 let counters = [];
 let counter = 0;
+let emptyRow;
 let emptyRowNumber;
+
+const rowsHTML = [
+  document.querySelector('[aria-label="Row 1"]'),
+  document.querySelector('[aria-label="Row 2"]'),
+  document.querySelector('[aria-label="Row 3"]'),
+  document.querySelector('[aria-label="Row 4"]'),
+  document.querySelector('[aria-label="Row 5"]'),
+  document.querySelector('[aria-label="Row 6"]'),
+];
 
 [...rows].forEach((row) => {
   counter++;
-  if (
-    row.innerHTML ==
-    '<div class="" style="animation-delay: 0ms;"><div class="Tile-module_tile__3ayIZ" role="img" aria-roledescription="tile" aria-label="empty" aria-live="polite" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 100ms;"><div class="Tile-module_tile__3ayIZ" role="img" aria-roledescription="tile" aria-label="empty" aria-live="polite" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 200ms;"><div class="Tile-module_tile__3ayIZ" role="img" aria-roledescription="tile" aria-label="empty" aria-live="polite" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 300ms;"><div class="Tile-module_tile__3ayIZ" role="img" aria-roledescription="tile" aria-label="empty" aria-live="polite" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 400ms;"><div class="Tile-module_tile__3ayIZ" role="img" aria-roledescription="tile" aria-label="empty" aria-live="polite" data-state="empty" data-animation="idle" data-testid="tile"></div></div>'
-  ) {
+  console.log(rowsHTML);
+  console.log(row);
+  console.log(rowsHTML.includes(row));
+  if (rowsHTML.includes(row)) {
     counters.push(counter);
+    emptyRowNumber = Math.min(...counters);
+    emptyRow = [...rows][emptyRowNumber - 1];
     return;
   }
 });
 
-emptyRowNumber = Math.min(...counters);
-
-let emptyRow = [...rows][emptyRowNumber - 1];
-
-let firstChild = emptyRow.children[0];
-let secondChild = emptyRow.children[1];
-let thirdChild = emptyRow.children[2];
-let fourthChild = emptyRow.children[3];
-let fifthChild = emptyRow.children[4];
-
-const indexToChild = {
-  0: firstChild,
-  1: secondChild,
-  2: thirdChild,
-  3: fourthChild,
-  4: fifthChild,
-};
+console.log(emptyRow);
+console.log(emptyRowNumber);
 
 const indexToChar = {
   0: firstChar,
@@ -13099,29 +13095,49 @@ const indexToChar = {
   4: fifthChar,
 };
 
+let i = 0;
+
 function autoFillAnswer() {
-  if (firstChild)
-    for (let i = 0; i < 5; i++) {
-      indexToChild[
-        i
-      ].children[0].innerHTML = `<span class="text-hint">${indexToChar[i]}</span>`;
-    }
+  [...emptyRow.children].forEach((firstDiv) => {
+    [...firstDiv.children].forEach((secondDiv) => {
+      secondDiv.innerHTML = `<span class="text-hint">${indexToChar[i]}</span>`;
+      i++;
+    });
+  });
 }
 
-function reset() {
-  emptyRow.innerHTML =
-    '<div class="" style="animation-delay: 0ms;"><div class="Tile-module_tile__3ayIZ" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 100ms;"><div class="Tile-module_tile__3ayIZ" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 200ms;"><div class="Tile-module_tile__3ayIZ" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 300ms;"><div class="Tile-module_tile__3ayIZ" data-state="empty" data-animation="idle" data-testid="tile"></div></div><div class="" style="animation-delay: 400ms;"><div class="Tile-module_tile__3ayIZ" data-state="empty" data-animation="idle" data-testid="tile"></div></div>';
-}
+const inProgressString = "IN_PROGRESS";
 
 setTimeout(() => {
   if (
-    gameStatus === "IN_PROGRESS" &&
+    gameStatus === inProgressString &&
     typeof autoFill !== "undefined" &&
     autoFill
   ) {
     autoFillAnswer();
+  } else {
+    console.log(gameStatus, inProgressString, autoFill);
+    if (typeof autoFill === "undefined") {
+      try {
+        chrome.storage.sync.get(function (result) {
+          console.log(result);
+          autoFill = result.autoFill;
+        });
+        autoFillAnswer();
+      } catch (error) {
+        console.log(error);
+        alert(
+          "An error occured. Please try again later or inspect this page for a better idea."
+        );
+      }
+    }
   }
 }, 200);
+
+const darkModeClassUnchecked =
+  '<div id="darkMode" class="Switch-module_container__DiBse"><button aria-checked="false" aria-label="darkMode" class="Switch-module_switch__LLcMj" role="switch" type="button"><span class="Switch-module_knob__oRTpP"></span></button></div>';
+const darkModeClassChecked =
+  '<div id="darkMode" class="Switch-module_container__DiBse Switch-module_checked__81fA3"><button aria-checked="true" aria-label="darkMode" class="Switch-module_switch__LLcMj" role="switch" type="button"><span class="Switch-module_knob__oRTpP"></span></button></div>';
 
 setInterval(() => {
   if (
@@ -13131,9 +13147,15 @@ setInterval(() => {
     if (darkMode) {
       document.body.classList = "dark";
       localStorage.setItem("nyt-wordle-darkmode", "true");
+      document.querySelector(
+        '[aria-label="darkMode"]'
+      ).parentElement.parentElement.innerHTML = darkModeClassChecked;
     } else {
       document.body.classList.remove("dark");
       localStorage.setItem("nyt-wordle-darkmode", "false");
+      document.querySelector(
+        '[aria-label="darkMode"]'
+      ).parentElement.parentElement.innerHTML = darkModeClassUnchecked;
     }
   }
 }, 100);
