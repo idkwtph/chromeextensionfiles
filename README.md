@@ -31,7 +31,7 @@ Some of the stuff that this extension can do are:
  - Dark Mode and Light Mode theme for this extension
  - Syncing the Wordle website theme with the website extension theme
 
-### Please note that more feature probably will get added as updates get added
+### Please note that more features probably will get added as updates get added
 
 ## Updates
 
