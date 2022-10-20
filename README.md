@@ -53,6 +53,11 @@ Some of the stuff that this extension can do are:
           - Fixing the link not working first-try
           - Fixing CPU and RAM usage (don't know if this is how say it)
  - 1.6 - Adds default settings to the extension
+ - 1.7 - Multiple bug fixes including:
+          - Fixing Local Storage usage
+          - Fixing Autofill
+          - Optimisation
+          - Fixing settings problems
 
 ## Credits
 
